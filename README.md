@@ -26,7 +26,7 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 #### Week 1: Environment & FastAPI
 - [x] **Day 1:** Install Poetry. Run `poetry new ai-service`. Verify virtual environment works.
   - *Reinforcement:* What does `poetry shell` do that `pip install` alone cannot? What is the Rails equivalent of a Poetry virtual environment?
-- [ ] **Day 2:** Set up FastAPI and Pydantic. Build a dummy `/health` endpoint.
+- [x] **Day 2:** Set up FastAPI and Pydantic. Build a dummy `/health` endpoint.
   - *Reinforcement:* What is the difference between `def` and `async def` in a FastAPI route? Name the Pydantic equivalent of Rails strong params + `ActiveModel::Serializer`.
 - [ ] **Day 3:** Route an HTTP POST request from Rails console to the new FastAPI endpoint.
   - *Reinforcement:* Which Ruby HTTP library did you use and why? What HTTP status code should FastAPI return for a malformed request body?
@@ -160,5 +160,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Tasks Done:** Successfully created public GitHub repository, initialized structured Poetry environment, and isolated runtime dependencies (`fastapi`, `uvicorn`, `pydantic`).
 * **Blockers:** None.
 * **Next Step:** Day 2 - Coding the asynchronous type-safe API server layer.
+
+### Day 2
+* **Date:** 2026-06-17
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Built modular `app/` package with `app/main.py` (ASGI entry point + lifespan hooks), `app/schemas/health.py` (Pydantic v2 typed contract), and `app/routers/health.py` (scoped `APIRouter` at `/api/v1`). Verified `GET /api/v1/health` returns `200 OK` with a typed JSON payload. Explored auto-generated Swagger UI at `/docs`.
+* **Reinforcement Answers:** `async def` suspends at `await` — no extra threads. `BaseModel` = serializer + strong params in one class. `APIRouter` = `namespace :api do namespace :v1`. `lifespan` = `config/initializers/` + `at_exit`.
+* **Blockers:** None.
+* **Next Step:** Day 3 - Fire an HTTP POST from Rails console into this FastAPI endpoint.
 
 
