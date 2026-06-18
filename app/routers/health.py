@@ -8,7 +8,7 @@ router = APIRouter(prefix="/api/v1", tags=["Health"])
     "/health",
     response_model=HealthResponse,
     summary="Service liveness probe",
-    description="Called by Rails and load balancers to confirm the AI microservice is alive.",
+    description="Called by Rails (and load balancers) to confirm the AI microservice is alive.",
 )
 async def health_check() -> HealthResponse:
     return HealthResponse()
