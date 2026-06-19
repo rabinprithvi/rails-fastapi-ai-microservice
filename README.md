@@ -28,9 +28,9 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
   - *Reinforcement:* What does `poetry shell` do that `pip install` alone cannot? What is the Rails equivalent of a Poetry virtual environment?
 - [x] **Day 2:** Set up FastAPI and Pydantic. Build a dummy `/health` endpoint.
   - *Reinforcement:* What is the difference between `def` and `async def` in a FastAPI route? Name the Pydantic equivalent of Rails strong params + `ActiveModel::Serializer`.
-- [ ] **Day 3:** Route an HTTP POST request from Rails console to the new FastAPI endpoint.
+- [x] **Day 3:** Route an HTTP POST request from Rails console to the new FastAPI endpoint.
   - *Reinforcement:* Which Ruby HTTP library did you use and why? What HTTP status code should FastAPI return for a malformed request body?
-- [ ] **Day 4:** Run `poetry add openai python-dotenv`. Make the first live API call via script.
+- [x] **Day 4:** Run `poetry add openai python-dotenv`. Make the first live API call via script.
   - *Reinforcement:* How does `python-dotenv` load your `.env` file, and what is its Rails equivalent (`dotenv` gem)? What happens if you exceed your OpenAI token quota?
 - [ ] **Day 5:** Move the OpenAI call inside a FastAPI endpoint. Use Pydantic to validate input.
   - *Reinforcement:* Why should you never put a blocking `openai.chat.completions.create()` call inside an `async def` route without wrapping it? What Pydantic decorator enforces field types at runtime?
@@ -169,4 +169,18 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Blockers:** None.
 * **Next Step:** Day 3 - Fire an HTTP POST from Rails console into this FastAPI endpoint.
 
+### Day 3
+* **Date:** 2026-06-18
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Built `POST /api/v1/echo` endpoint with `EchoRequest` and `EchoResponse` Pydantic schemas. Wrote standalone Ruby `rails_client.rb` using `Net::HTTP` that POSTs JSON to FastAPI and reads the response. Debugged port mismatch (8001 vs 8081) and string literal vs variable reference bug (`"payload.message"` vs `payload.message`). Added `.gitignore` and ran `git rm --cached` to remove already-tracked `__pycache__` files.
+* **Blockers:** Port mismatch caused 404. String literals in Python look identical to variable names coming from Ruby — quotes always mean string, no exceptions.
+* **Reinforcement Score:** 3.5/4 — missed that `.gitignore` does not retroactively untrack already-committed files; `git rm --cached` is required.
+* **Next Step:** Day 4 - Install OpenAI SDK and make the first live LLM API call via script.
+
+### Day 4
+* **Date:** 2026-06-19
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Installed `openai` and `python-dotenv` via pip. Created `.env` with Groq API key (OpenAI-compatible). Built `scripts/test_openai.py` — made first live LLM call using Groq's Llama 3.1 via the OpenAI SDK. Parsed `response.choices[0].message.content` and `response.usage.total_tokens`. Confirmed `finish_reason='stop'` meaning the model completed its thought.
+* **Blockers:** Script produced no output on first run — root cause was unsaved file in Cursor. Python executes the file on disk, not the editor buffer. Rule: always `Cmd+S` before running.
+* **Next Step:** Day 5 - Move the LLM call inside a FastAPI endpoint with Pydantic input validation.
 
