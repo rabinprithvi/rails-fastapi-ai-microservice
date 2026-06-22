@@ -1,7 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from app.routers import health
-from app.routers import chat
+from app.routers import health, chat
 
 
 @asynccontextmanager
