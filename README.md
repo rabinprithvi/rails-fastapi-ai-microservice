@@ -32,14 +32,14 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
   - *Reinforcement:* Which Ruby HTTP library did you use and why? What HTTP status code should FastAPI return for a malformed request body?
 - [x] **Day 4:** Run `poetry add openai python-dotenv`. Make the first live API call via script.
   - *Reinforcement:* How does `python-dotenv` load your `.env` file, and what is its Rails equivalent (`dotenv` gem)? What happens if you exceed your OpenAI token quota?
-- [ ] **Day 5:** Move the OpenAI call inside a FastAPI endpoint. Use Pydantic to validate input.
+- [x] **Day 5:** Move the OpenAI call inside a FastAPI endpoint. Use Pydantic to validate input.
   - *Reinforcement:* Why should you never put a blocking `openai.chat.completions.create()` call inside an `async def` route without wrapping it? What Pydantic decorator enforces field types at runtime?
 - [ ] **Weekend 1:** Handle API errors gracefully and refactor code into clean modules.
   - *Reinforcement:* What FastAPI class do you raise to return a structured HTTP error response (equivalent to `render json: {error:}, status: 422` in Rails)?
-
+ 
 #### Week 2: DeepLearning.AI – LangChain Foundations
-- [ ] **Day 8:** Watch Modules 1-2 of *LangChain for LLM Application Development* (Free).
-  - *Reinforcement:* What problem does LangChain solve that raw `openai` SDK calls do not? Name one LangChain abstraction equivalent to a Rails concern/module.
+- [x] **Day 8:** LangChain foundations — `ChatPromptTemplate`, `ChatGroq`, `StrOutputParser`, LCEL pipe operator. Built first chain in `scripts/test_langchain.py`.
+  - *Reinforcement:* What does the `|` pipe operator do in LCEL? What does `StrOutputParser` replace from the raw SDK approach?
 - [ ] **Day 9:** Watch Modules 3-4 of the same course. Focus on Prompts and Parsers.
   - *Reinforcement:* What is a `PromptTemplate` and how is it different from a plain Python f-string? What does an output parser do to a raw LLM string response?
 - [ ] **Day 10:** Replace raw OpenAI dictionary code with LangChain Expression Language (LCEL).
@@ -183,4 +183,20 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Tasks Done:** Installed `openai` and `python-dotenv` via pip. Created `.env` with Groq API key (OpenAI-compatible). Built `scripts/test_openai.py` — made first live LLM call using Groq's Llama 3.1 via the OpenAI SDK. Parsed `response.choices[0].message.content` and `response.usage.total_tokens`. Confirmed `finish_reason='stop'` meaning the model completed its thought.
 * **Blockers:** Script produced no output on first run — root cause was unsaved file in Cursor. Python executes the file on disk, not the editor buffer. Rule: always `Cmd+S` before running.
 * **Next Step:** Day 5 - Move the LLM call inside a FastAPI endpoint with Pydantic input validation.
+
+### Day 5
+* **Date:** 2026-06-20
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Created `app/services/llm.py` (service layer with `asyncio.to_thread()` for non-blocking Groq calls), `app/schemas/chat.py` (`UserPrompt` + `AIResponse` Pydantic models), and `app/routers/chat.py` (`POST /api/v1/chat`). Mounted router in `main.py`. Updated `rails_client.rb` to POST a real prompt and read the LLM reply. Verified full Rails → FastAPI → Groq → Rails pipeline working end-to-end.
+* **Blockers:** `load_dotenv()` declared but not called — client instantiated before env vars loaded. `completions` and `messages` typos in SDK call. `rails_client.rb` still pointed at old `/api/v1/echo` endpoint.
+* **Reinforcement Score:** 4/4 — event loop, asyncio.to_thread, service layer separation, `**result` dict unpacking all correct.
+* **Next Step:** Weekend 1 - Error handling and refactoring (deferred to later).
+
+### Day 8
+* **Date:** 2026-06-22
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Installed `langchain` and `langchain-groq`. Built first LCEL chain in `scripts/test_langchain.py` using `ChatPromptTemplate`, `ChatGroq`, `StrOutputParser`, and the `|` pipe operator. Replaced 7 lines of raw SDK boilerplate with a 3-line composable chain. Debugged Ruby-to-Python friction: `#{var}` → `{var}`, tuple args → dict, missing `{` on dict literal.
+* **Blockers:** Ruby `#{variable}` interpolation habit caused template variables to not resolve. `chain.invoke()` received tuples instead of a dict — `AttributeError: 'tuple' object has no attribute 'items'`.
+* **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
+* **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
