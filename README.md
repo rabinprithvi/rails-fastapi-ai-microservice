@@ -40,8 +40,8 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 #### Week 2: DeepLearning.AI – LangChain Foundations
 - [x] **Day 8:** LangChain foundations — `ChatPromptTemplate`, `ChatGroq`, `StrOutputParser`, LCEL pipe operator. Built first chain in `scripts/test_langchain.py`.
   - *Reinforcement:* What does the `|` pipe operator do in LCEL? What does `StrOutputParser` replace from the raw SDK approach?
-- [ ] **Day 9:** Watch Modules 3-4 of the same course. Focus on Prompts and Parsers.
-  - *Reinforcement:* What is a `PromptTemplate` and how is it different from a plain Python f-string? What does an output parser do to a raw LLM string response?
+- [x] **Day 9:** Structured LLM output — `with_structured_output()`, `json_mode`, Pydantic schema enforcement. Built `scripts/test_structured_output.py`.
+  - *Reinforcement:* Why does `json_mode` work better than tool-calling on small models? What causes a `ValidationError` when the LLM uses wrong field names?
 - [ ] **Day 10:** Replace raw OpenAI dictionary code with LangChain Expression Language (LCEL).
   - *Reinforcement:* Write the LCEL pipe syntax for: prompt → model → output parser. What operator does LCEL use to chain steps?
 - [ ] **Day 11:** Watch the final modules of the course focusing on Memory chains.
@@ -200,3 +200,9 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 9
+* **Date:** 2026-06-23
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Built `scripts/test_structured_output.py` using `with_structured_output()` and `json_mode` to return a typed `CodeReview` Pydantic object from the LLM. Debugged three structured output failure modes: `PydanticOutputParser` markdown response, tool-calling `400 BadRequest` on small model, and Pydantic `ValidationError` from mismatched field names. Fixed by using `json_mode` and spelling out exact field names in the system prompt.
+* **Blockers:** `llama-3.1-8b-instant` ignores JSON format instructions with `PydanticOutputParser`. Tool-calling API (`with_structured_output` default) not supported by the model. Model used its own field names (`rating`, `comments`) instead of schema field names (`score`, `issues`).
+* **Next Step:** Day 10 - Replace raw OpenAI calls in `app/services/llm.py` with LangChain LCEL.
