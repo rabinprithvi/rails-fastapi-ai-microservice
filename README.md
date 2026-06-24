@@ -200,6 +200,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 10
+* **Date:** 2026-06-24
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Replaced raw `openai.OpenAI` SDK in `app/services/llm.py` with a LangChain LCEL chain (`ChatPromptTemplate | ChatGroq | StrOutputParser`). Switched from `asyncio.to_thread()` workaround to native `chain.ainvoke()`. Verified full Rails → FastAPI → LangChain → Groq → Rails pipeline returns identical `200 OK` response. Service layer is now provider-swappable and LangSmith-ready.
+* **Blockers:** Four bugs caught during coding: stale `OpenAI` client left in imports, `{human}` template variable mismatch (should be `{prompt}`), `StrOutputParser` missing `()` instantiation, and missing `await` on `chain.ainvoke()`.
+* **Next Step:** Day 11 - Memory chains — `ConversationBufferMemory` and multi-turn conversation context.
+
 ### Day 9
 * **Date:** 2026-06-23
 * **Time Invested:** 60 Mins
