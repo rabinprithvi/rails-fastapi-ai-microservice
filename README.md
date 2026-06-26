@@ -200,6 +200,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 11
+* **Date:** 2026-06-26
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Built `scripts/test_memory.py` — a 3-turn conversational chain using `RunnableWithMessageHistory`, `InMemoryChatMessageHistory`, and `MessagesPlaceholder`. Verified LLM correctly recalls name and role across turns. Created `docs/memory-chain-revision.md` with full annotated explanation of all memory chain components.
+* **Blockers:** `langchain_community` not installed — fixed by switching to `langchain_core.chat_history.InMemoryChatMessageHistory`. Typo `sessiion_id` caused `NameError`. Missing `store = {}` definition.
+* **Next Step:** Day 12 - Wire memory chain into FastAPI endpoint with `session_id` passed from Rails.
+
 ### Day 10
 * **Date:** 2026-06-24
 * **Time Invested:** 60 Mins
