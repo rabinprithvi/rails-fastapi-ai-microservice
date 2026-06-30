@@ -200,6 +200,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 16
+* **Date:** 2026-07-01
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Installed `langchain-text-splitters`. Built `scripts/test_chunking.py` — split a 4-section company policy document using `RecursiveCharacterTextSplitter` with two configurations: large (300 chars, 0 overlap) producing 4 clean section-aligned chunks, and small (150 chars, 30 overlap) producing 8 chunks that split related sentences across chunk boundaries. Confirmed that chunk size must match document structure — too small splits answers across multiple vectors.
+* **Blockers:** None.
+* **Next Step:** Day 17 - Write embeddings script with disk-persistent ChromaDB.
+
 ### Day 15
 * **Date:** 2026-06-30
 * **Time Invested:** 60 Mins
