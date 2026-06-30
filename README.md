@@ -200,6 +200,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 15
+* **Date:** 2026-06-30
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Installed `chromadb`. Built `scripts/test_chroma.py` — created an in-memory ChromaDB collection, added 5 company documents, ran a semantic query ("How long do we have to fix a critical incident?"). Verified ChromaDB returned both SLA/incident sentences and ignored unrelated docs (leave policy, kitchen). Confirmed semantic search works without exact keyword matching.
+* **Blockers:** None.
+* **Next Step:** Day 16 - Document chunking strategies and chunk size experimentation.
+
 ### Day 12
 * **Date:** 2026-06-30
 * **Time Invested:** 60 Mins
