@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from app.routers import health, chat
+from app.routers import health, chat, conversation
 
 
 @asynccontextmanager
@@ -22,3 +22,4 @@ app = FastAPI(
 
 app.include_router(health.router)
 app.include_router(chat.router)
+app.include_router(conversation.router)
