@@ -200,6 +200,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 12
+* **Date:** 2026-06-30
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Wired Day 11 memory chain into a production FastAPI endpoint. Created `app/schemas/conversation.py` (`ConversationRequest` + `ConversationResponse`), `app/services/conversation.py` (memory chain with `RunnableWithMessageHistory`), and `app/routers/conversation.py` (`POST /api/v1/conversation`). Mounted router in `main.py`. Updated `rails_client.rb` to send `session_id` across two turns and verify contextual memory.
+* **Blockers:** `from openai import BaseModel` typo — should be `from pydantic import BaseModel`. Missing `await` on `get_conversation_reply`. Typo `sesion_id`. Stray import `from scripts.test_memory import get_session_history` — overwrote local definition. Missing `s` on `input_messages_key` and `history_messages_key`.
+* **Next Step:** Weekend 2 — push framework orchestration code to production branch. Week 3 starts Day 15 with ChromaDB and vector embeddings.
+
 ### Day 11
 * **Date:** 2026-06-26
 * **Time Invested:** 60 Mins
