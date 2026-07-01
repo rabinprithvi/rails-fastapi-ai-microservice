@@ -1,0 +1,7 @@
+
+2026-06-26 14:02:31 ERROR CheckoutService NullPointerException at PaymentProcessor.java:142
+2026-06-26 14:02:35 ERROR CheckoutService Database connection timeout after 30s
+2026-06-26 14:31:00 INFO CheckoutService Service restored after 29 minutes downtime
+2026-06-26 15:45:12 ERROR AuthService JWT token validation failed for user_id=9823
+2026-06-26 15:45:13 ERROR AuthService Redis cache miss — falling back to database
+2026-06-26 16:02:00 INFO AuthService Issue resolved after 17 minutes

@@ -200,6 +200,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 17
+* **Date:** 2026-07-01
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Created `data/policy.txt` (SLA + escalation policy) and `data/errors.log` (sample checkout + auth errors). Built `scripts/test_embedding.py` using `chromadb.PersistentClient` — two separate collections (`policy`, `errors`), chunked both files with `RecursiveCharacterTextSplitter(500, 50)`, stored in `./chroma_data/` on disk. Queried both collections and printed distances. Observed built-in embedding model limitation — P2 ranked closer than P1 for a P1 query. Will fix with OpenAI embeddings in Week 4.
+* **Blockers:** None.
+* **Next Step:** Day 18 - Verify disk persistence across restarts, add metadata to chunks.
+
 ### Day 16
 * **Date:** 2026-07-01
 * **Time Invested:** 60 Mins

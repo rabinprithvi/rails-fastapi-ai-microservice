@@ -1,0 +1,16 @@
+
+Section 1: Incident Response Policy
+P1 incidents are critical production outages affecting all users.
+They must be resolved within 15 minutes of detection.
+The on-call engineer must be paged immediately upon detection.
+Failure to resolve within 15 minutes requires escalation to the engineering manager.
+
+Section 2: P2 Incident Policy
+P2 incidents affect a subset of users or a non-critical system.
+Resolution time is 4 hours from detection.
+A support ticket must be filed within 30 minutes of detection.
+
+Section 3: Escalation Policy
+If a P1 is not resolved within 10 minutes, escalate to the engineering manager.
+If unresolved after 15 minutes, escalate to the CTO.
+All escalations must be logged in the incident tracker with timestamps.
