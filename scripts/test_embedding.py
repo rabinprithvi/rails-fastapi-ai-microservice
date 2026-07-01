@@ -5,7 +5,13 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 # client
 client = chromadb.PersistentClient(path="./chroma_data")
 
-# collections
+
+# delete existing collections
+client.delete_collection(name="policy")
+client.delete_collection(name="errors")
+
+# create new collections
+
 policy_collection = client.get_or_create_collection(name="policy")
 errors_collection = client.get_or_create_collection(name="errors")
 
@@ -26,11 +32,13 @@ errors_chunks = splitter.split_text(errors_text)
 policy_collection.add(
     documents=policy_chunks,
     ids= [f"policy_{i}" for i in range(len(policy_chunks))],
+    metadatas = [{"source": "policy.txt", "type": "policy"} for _ in policy_chunks],
 )
 
 errors_collection.add(
     documents=errors_chunks,
     ids=[f"error_{i}" for i in range(len(errors_chunks)) ],
+    metadatas = [{"source": "errors.log", "type": "error_log"} for _ in errors_chunks]
 )
 
 print(f"Policy chunks stored : {len(policy_chunks)}")
@@ -54,3 +62,4 @@ results = errors_collection.query(
 )
 for doc, dist in zip(results["documents"][0], results["distances"][0]):
     print(f"  Distance {dist:.3f}: {doc[:80]}...")
+

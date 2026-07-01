@@ -200,6 +200,13 @@ This repository tracks my daily progress as I build a scalable enterprise AI eng
 * **Reinforcement Score:** 4/4 — LCEL pipe, StrOutputParser, KeyError on missing invoke key, ChatPromptTemplate vs f-string all correct.
 * **Next Step:** Day 9 - Prompts, parsers, and structured output from LangChain.
 
+### Day 18
+* **Date:** 2026-07-02
+* **Time Invested:** 60 Mins
+* **Tasks Done:** Built `scripts/test_persistence.py` — opened existing `./chroma_data/` with `get_collection()` (no re-ingest), verified chunk counts persisted across script restarts. Added `metadatas` parameter to both `collection.add()` calls in `test_embedding.py` with `source` and `type` fields. Verified metadata appears on query results: `{'source': 'policy.txt', 'type': 'policy'}` and `{'source': 'errors.log', 'type': 'error_log'}`.
+* **Blockers:** `"metadata"` typo — ChromaDB requires `"metadatas"` (plural). `print` statement indented outside `for` loop — Python indentation controls scope. Broken line in `ids=` list comprehension.
+* **Next Step:** Day 19 - Full semantic query pipeline — combine ChromaDB retrieval with LLM to produce a natural language answer.
+
 ### Day 17
 * **Date:** 2026-07-01
 * **Time Invested:** 60 Mins
